@@ -78,6 +78,9 @@ func collate(a []string) (s string) {
 func open(file string) (*os.File) {
 	f, err := os.Open(file)
 	if err != nil {
+		if !confirm("no todo, create new?") {
+			os.Exit(0)
+		}
 		f, err = os.Create(file)
 		if err != nil {
 			return nil
@@ -185,12 +188,19 @@ func (todo *todoList) swap(i int) bool {
 	}
 	(*todo)[0], (*todo)[i+1] = (*todo)[i+1], (*todo)[0]
 	fmt.Println((*todo)[0])
-	fmt.Printf("swap deeper? y/n  ")
-	s := ""
-	fmt.Scanln(&s)
-	if s == "y" || s == "yes" {
+	if confirm("swap deeper?") {
 		i++
 		todo.swap(i)
 	}
 	return true
+}
+
+func confirm(prompt string) bool {
+	fmt.Printf(prompt+" y/n  ")
+	s := ""
+	fmt.Scanln(&s)
+	if s == "y" || s == "yes" {
+		return true
+	}
+	return false
 }
