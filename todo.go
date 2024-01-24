@@ -148,8 +148,10 @@ func (todo *todoList) done() bool {
 	if len(*todo) < 1 {
 		return true
 	}
-	fmt.Println("next:")
 	*todo = (*todo)[1:]
+	if len(*todo) > 0 {
+		fmt.Println("next:")
+	}
 	checkAndPrint(*todo)
 	return true
 }
