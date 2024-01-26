@@ -176,7 +176,7 @@ func (todo *todoList) start() bool {
 	return true
 }
 
-// undocumented bonus feature
+// bonus feature
 func (todo *todoList) swap(i int) bool {
 	if !flag("swap") {
 		return false
