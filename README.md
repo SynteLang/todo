@@ -22,6 +22,11 @@ Suggested use case: use `todo` to collect typos or other diversions within a pro
 
 Tested on FreeBSD, expected to be compatible with any unix-like/POSIX system
 
+Installation:
++ install `go` if you don't have it - [go.dev/doc/install](https://go.dev/doc/install)
++ check `echo $GOPATH` (usually '~/go/bin/') is in your $PATH
++ `go install github.com/syntelang/todo`
+
 The design maximises effectiveness by placing focus on the only the next task to-do, and also by implicitly categorising tasks per project directory
 
 Any errors are simply printed to stdout, as this is a human-facing utlitity and not intended to be used in scripts
