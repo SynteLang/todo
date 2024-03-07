@@ -131,7 +131,8 @@ func (todo *todoList) pushString(td string) {
 func checkAndPrint(t todoList) {
 	l := len(t)
 	if l < 1 {
-		return // nothing to print
+		fmt.Println("-everything done!-")
+		return
 	}
 	fmt.Println(t[0])
 }
@@ -196,7 +197,7 @@ func (todo *todoList) swap(i int) bool {
 }
 
 func confirm(prompt string) bool {
-	fmt.Printf(prompt+" y/n  ")
+	fmt.Printf(prompt+" y/n/_  ")
 	s := ""
 	fmt.Scanln(&s)
 	if s == "y" || s == "yes" {

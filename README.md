@@ -2,6 +2,8 @@
 
 `todo` is a minimalist CLI utility for efficient workflows
 
+if you like, you can pronounce it like "dodo"
+
 >
 	usage: todo [pop|done|all|help]
 
