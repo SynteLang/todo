@@ -27,10 +27,10 @@ func usage() bool {
   - if the task begins with "!" it will be added to bottom
 
  subcommands:
-    'top'	prints the next task to-do
-    'pop'	 removes from list and prints next task
-    'all'	adds multiple tasks, type "q" to finish
-    'help'	will print this message.
+   'top'   prints the next task to-do
+   'pop'   removes from list and prints next task
+   'all'   adds multiple tasks, type "q" to finish
+   'help'  will print this message.
 
 the tasks are saved as '.todo' in current directory
 
