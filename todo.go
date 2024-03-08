@@ -42,6 +42,10 @@ any list of arguments that does not start with a subcommand is treated as a new 
 }
 
 func main() {
+	if flag("done") {
+		fmt.Println("done: [Deprecated]")
+		return
+	}
 	if usage() {
 		return
 	}
