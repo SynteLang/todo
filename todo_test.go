@@ -19,8 +19,8 @@ type testJig struct {
 }
 
 var testList = map[string]testJig{
-	"pushString()": { "pushtest", todoList{"item"}, todoList{"pushtest", "item"}},
-	"done()": { "", todoList{"donetest", "item"}, todoList{"item"}},
+	"pushString()": { " pushtest ", todoList{"item"}, todoList{"pushtest", "item"}},
+	"pop()": { "", todoList{"poptest", "item"}, todoList{"item"}},
 	"swap()": { "", todoList{"item one", "item two", "swaptest"}, todoList{"item two", "item one", "swaptest"}},
 }
 
@@ -38,6 +38,7 @@ func TestPushString(t *testing.T) {
 	}
 }
 
+// check all todo items match
 func passing(tst testJig) bool {
 	for i,v := range tst.td {
 		if v != tst.exp[i] {
@@ -51,21 +52,14 @@ func passing(tst testJig) bool {
 }
 
 func flagDummy(s string) bool {
-/*	if len(os.Args) > 2 {
-		return false
-	}
-	if len(os.Args) == 2 && os.Args[1] == s {
-		return true
-	}
-	return false*/
 	return true
 }
 
 func TestDone(t *testing.T) {
-	name := "done()"
+	name := "pop()"
 	tst:= testList[name]
 	fmt.Println(name)
-	tst.td.done()
+	tst.td.pop()
 	if !passing(tst) {
 		t.Errorf(`%s => %v, expected %v`, name, tst.td, tst.exp)
 	}

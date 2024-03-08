@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"fmt"
+	"strings"
 	"os"
 )
 
@@ -14,24 +15,29 @@ const (
 type todoList []string
 
 func usage() bool {
-	if !flag("help") && !flag("-h") && !flag("--help") {
+	if !flag("help") && !flag("-h") && !flag("--help") &&
+	!flag("usage") && !flag("-u") && !flag("--usage") {
 		return false
 	}
 	fmt.Println(
-`usage: todo [pop|done|all|help]
+`usage: todo [top|pop|all|help]
 
 'todo' prompts for a task to add to list and exits
   - most recent task added is popped (FIFO)
-  - if the task begins with "!" it will be added to bottom)
+  - if the task begins with "!" it will be added to bottom
 
  subcommands:
-    'pop'	prints the number of tasks and the next task to-do
-    'done'	prints and removes from list
+    'top'	prints the next task to-do
+    'pop'	 removes from list and prints next task
     'all'	adds multiple tasks, type "q" to finish
     'help'	will print this message.
 
 the tasks are saved as '.todo' in current directory
-'less .todo' to show all tasks`)
+
+type 'more .todo' to show all tasks
+
+any list of arguments that does not start with a subcommand is treated as a new task`)
+	fmt.Println()
 	return true
 }
 
@@ -50,7 +56,7 @@ func main() {
 		todo.pushString(t.Text())
 		return
 	}
-	if todo.pop() || todo.done() || todo.start() || todo.swap(0) {
+	if todo.top() || todo.pop() || todo.start() || todo.swap(0) {
 		return
 	}
 	s := collate(os.Args)
@@ -117,36 +123,35 @@ func (todo *todoList) save() {
 }
 
 func (todo *todoList) pushString(td string) {
-	if len(td) < 1 {
+	if td == "" {
 		return
 	}
-	if td[:1] != "!" { // safe, as we know which rune
-		*todo = append(todoList{td}, *todo...) // default fifo
-	} else {
+	td = strings.TrimSpace(td)
+	if td[:1] == "!" { // safe, as we know which rune
 		*todo = append(*todo, td[1:])
+		return
 	}
-	return
+	*todo = append(todoList{td}, *todo...) // default fifo
 }
 
 func checkAndPrint(t todoList) {
-	l := len(t)
-	if l < 1 {
+	if len(t) < 1 {
 		fmt.Println("-everything done!-")
 		return
 	}
 	fmt.Println(t[0])
 }
 
-func (todo todoList) pop() bool {
-	if !flag("pop") {
+func (todo todoList) top() bool {
+	if !flag("top") {
 		return false
 	}
 	checkAndPrint(todo)
 	return true
 }
 
-func (todo *todoList) done() bool {
-	if !flag("done") {
+func (todo *todoList) pop() bool {
+	if !flag("pop") {
 		return false
 	}
 	if len(*todo) < 1 {
