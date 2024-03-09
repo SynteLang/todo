@@ -35,9 +35,14 @@ Installation:
 
 The design maximises effectiveness by placing focus on the only the next task to-do, and also by implicitly categorising tasks per project directory
 
+## FAQ
++ If you have a task that takes more than one line to describe, you probably need to break it down into smaller tasks. This will help your productivity.  
+Alternatively you could write the task to a file and `todo name-of-file.txt`, then later you can simply, for example `vim (todo top)` (fish shell)
++ Why not just write `// TODO` comments in your code? Well that can work well for some use cases. The benefit of `todo` is that it keeps your code - and your commits - clean, and in one place.  
+
 Any errors are simply printed to stdout, as this is a human-facing utlitity and not intended to be used in scripts
 
 Bonus feature:
 `todo swap` will shunt away a task, by swapping up one from deeper in the stack. Will prompt to go deeper, as required. Type "y" to accept, "n" or nothing to finish.
 
-User feedback, code review comments or bug reports are very much welcome
+User feedback, code review comments or bug reports are very much welcome :)
