@@ -13,15 +13,15 @@ import (
 )
 
 type testJig struct {
-	in string
-	td todoList
+	in  string
+	td  todoList
 	exp todoList
 }
 
 var testList = map[string]testJig{
-	"pushString()": { " pushtest ", todoList{"item"}, todoList{"pushtest", "item"}},
-	"pop()": { "", todoList{"poptest", "item"}, todoList{"item"}},
-	"swap()": { "", todoList{"item one", "item two", "swaptest"}, todoList{"item two", "item one", "swaptest"}},
+	"pushString()": {" pushtest ", todoList{"item"}, todoList{"pushtest", "item"}},
+	"pop()":        {"", todoList{"poptest", "item"}, todoList{"item"}},
+	"swap()":       {"", todoList{"item one", "item two", "swaptest"}, todoList{"item two", "item one", "swaptest"}},
 }
 
 func init() {
@@ -40,7 +40,7 @@ func TestPushString(t *testing.T) {
 
 // check all todo items match
 func passing(tst testJig) bool {
-	for i,v := range tst.td {
+	for i, v := range tst.td {
 		if v != tst.exp[i] {
 			return false
 		}
@@ -57,7 +57,7 @@ func flagDummy(s string) bool {
 
 func TestDone(t *testing.T) {
 	name := "pop()"
-	tst:= testList[name]
+	tst := testList[name]
 	fmt.Println(name)
 	tst.td.pop()
 	if !passing(tst) {
@@ -67,7 +67,7 @@ func TestDone(t *testing.T) {
 
 func TestSwap(t *testing.T) {
 	name := "swap()"
-	tst:= testList[name]
+	tst := testList[name]
 	fmt.Println(name)
 	tst.td.swap(0)
 	if !passing(tst) {

@@ -3,12 +3,12 @@ package main
 import (
 	"bufio"
 	"fmt"
-	"strings"
 	"os"
+	"strings"
 )
 
 const (
-	file = ".todo" // a to-do list is saved per directory
+	file     = ".todo" // a to-do list is saved per directory
 	fileMode = 0644
 )
 
@@ -16,11 +16,11 @@ type todoList []string
 
 func usage() bool {
 	if !flag("help") && !flag("-h") && !flag("--help") &&
-	!flag("usage") && !flag("-u") && !flag("--usage") {
+		!flag("usage") && !flag("-u") && !flag("--usage") {
 		return false
 	}
 	fmt.Println(
-`usage: todo [top|pop|all|help]
+		`usage: todo [top|pop|all|help]
 
 'todo' prompts for a task to add to list and exits
   - most recent task added is popped (FIFO)
@@ -85,7 +85,7 @@ func collate(a []string) (s string) {
 	return s
 }
 
-func open(file string) (*os.File) {
+func open(file string) *os.File {
 	f, err := os.Open(file)
 	if err != nil {
 		if !confirm("no todo, create new?") {
@@ -191,7 +191,7 @@ func (todo *todoList) swap(i int) bool {
 	if !flag("swap") {
 		return false
 	}
-	l := len(*todo) 
+	l := len(*todo)
 	if l < i+2 {
 		fmt.Println("unable to swap, not enough items")
 		return true
@@ -206,7 +206,7 @@ func (todo *todoList) swap(i int) bool {
 }
 
 func confirm(prompt string) bool {
-	fmt.Printf(prompt+" y/n/_  ")
+	fmt.Printf(prompt + " y/n/_  ")
 	s := ""
 	fmt.Scanln(&s)
 	if s == "y" || s == "yes" {
