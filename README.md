@@ -1,5 +1,7 @@
 # todo
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/syntelang/todo)](https://goreportcard.com/report/github.com/syntelang/todo)
+
 `todo` is a minimalist CLI utility for efficient workflows
 
 if you like, you can pronounce it like "dodo"
