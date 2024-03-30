@@ -198,9 +198,19 @@ func (todo *todoList) swap(i int) bool {
 	}
 	(*todo)[0], (*todo)[i+1] = (*todo)[i+1], (*todo)[0]
 	fmt.Println((*todo)[0])
-	if confirm("swap deeper?") {
+	fmt.Printf("swap deeper? y/n/_/pop  ")
+	s := ""
+	fmt.Scanln(&s)
+	if s == "y" || s == "yes" {
 		i++
 		todo.swap(i)
+	}
+	if s == "pop" {
+		*todo = (*todo)[1:]
+		if len(*todo) > 0 {
+			fmt.Println("next:")
+		}
+		checkAndPrint(*todo)
 	}
 	return true
 }
